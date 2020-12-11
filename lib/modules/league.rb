@@ -1,4 +1,4 @@
-class League
+module League
 
   
 end

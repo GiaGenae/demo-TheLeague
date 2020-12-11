@@ -1,7 +1,15 @@
+# Displays information [include puts/print]
+
+require_relative "../lib/modules/league"
+require_relative "../lib/cli"
+require_relative "../lib/api"
+
 class League::CLI
 
     def run 
         greeting
+        teams
+        exit
     end
 
     def greeting
@@ -13,4 +21,11 @@ class League::CLI
         Good luck!"
     end
 
+    def teams
+        # League::Team.each.with_index(1) do |team, i|
+            # puts "#{i + 1}. #{team.name}"
+    end
+
+    def exit
+    end
 end

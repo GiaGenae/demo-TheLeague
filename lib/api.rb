@@ -1,26 +1,18 @@
-require_relative "../config/environment"
 
 class League::API
 
     def initialize
-        @url = "https://www.balldontlie.io/api/v1/stats"
+        @url = "https://www.balldontlie.io/api/v1/teams"
     end
 
-    def get_player
+    def get_team
         uri = URI.parse(@url)
         response = Net::HTTP.get(uri)
         data = JSON.parse(response)
-        data["data"].each do |player|
-            get_player_data(player["data"])
+        data["data"].each do |team|
+            Team.new(team)
         end
     end
-
-    def get_player_data(url)
-        uri = URI.parse(@url)
-        response = Net::HTTP.get(uri)
-        data = JSON.parse(response)
-        Player.new(data)
-    end
+    
 end
 
-League::API.new.get_player # Laura said we will not be using; ask about this.

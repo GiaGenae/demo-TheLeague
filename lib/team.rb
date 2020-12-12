@@ -1,4 +1,4 @@
-class Team
+class League::Team
 
     @@all = []
   
@@ -13,5 +13,5 @@ class Team
     def self.all
         @@all
     end
-    binding.pry
+
 end

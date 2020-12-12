@@ -10,9 +10,8 @@ class League::API
         response = Net::HTTP.get(uri)
         data = JSON.parse(response)
         data["data"].each do |team|
-            Team.new(team)
+            League::Team.new(team)
         end
     end
-    
 end
 

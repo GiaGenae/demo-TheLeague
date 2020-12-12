@@ -2,6 +2,5 @@
 
 require_relative "../config/environment"
 
-# League::CLI.new.run
+League::CLI.new.run
 
-League::API.new.get_team 

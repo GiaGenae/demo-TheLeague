@@ -14,4 +14,5 @@ class League::Team
         @@all
     end
 
+
 end

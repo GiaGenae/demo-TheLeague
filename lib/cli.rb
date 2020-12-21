@@ -57,15 +57,21 @@ class League::CLI
             puts ""
             puts ""
             teams
+            loop do 
                 prompt = gets.chomp
-                    if prompt.to_i.between?(1,League::Team.all.size)
-                        teams_data(prompt)
-                    end
-                    puts ""
+                if prompt.to_i.between?(1,League::Team.all.size)
+                    teams_data(prompt)
+                elsif prompt == "exit"
+                    exit
+                else 
+                    puts "Invalid entry. Input valid number or 'exit'."
+                end
+                puts ""
+            end
 
         elsif input == "n"
             puts "Better luck next year!"
-            exit
+            goodbye
         else 
             puts "Invalid entry. Please choose (y/n)"
             ready
@@ -97,7 +103,7 @@ class League::CLI
     end
 
 
-    def exit
+    def goodbye
         puts "Good luck in the off season!"
     end
 end

@@ -49,19 +49,22 @@ class League::CLI
     #asks user if ready to begin (y/n)
     def ready
 
-        input = gets.strip
+        input = gets.strip.downcase
 
         if input == "y"
             puts "Great! Let's get started."
             sleep(2.5)
             puts ""
             puts ""
-            teams
+            League::Team.teams
             loop do 
-                prompt = gets.chomp
-                if prompt.to_i.between?(1,League::Team.all.size)
-                    teams_data(prompt)
+                prompt = gets.strip.downcase
+                if prompt.to_i.between?(1,League::Team.all.size) 
+                    selected_team = League::Team.all[prompt.to_i-1]
+                    selected_team.teams_data
+                    puts "Would you like to access another team? If not, type 'exit'."
                 elsif prompt == "exit"
+                    goodbye 
                     exit
                 else 
                     puts "Invalid entry. Input valid number or 'exit'."
@@ -78,29 +81,29 @@ class League::CLI
         end
     end
 
-    #provides list of teams to choose from
-    def teams
-        counter = 1
+    # #provides list of teams to choose from
+    # def teams
+    #     counter = 1
 
-        League::Team.all.each do |team|
-            puts "#{counter}" + ". " + team.full_name
+    #     League::Team.all.each do |team|
+    #         puts "#{counter}" + ". " + team.full_name
 
-        counter += 1
-        end
-    end
+    #     counter += 1
+    #     end
+    # end
 
-    #provides additional data for each team
-    def teams_data(prompt)
-        selected_team = League::Team.all[prompt.to_i-1]
-        puts ""
-        puts "---------------------------"
-        puts "Team Name: " + selected_team.full_name
-        puts "City: " + selected_team.city
-        puts "Division: " + selected_team.division
-        puts "Conference: " + selected_team.conference
-        puts ""
-        puts "---------------------------"
-    end
+    # #provides additional data for each team
+    # def teams_data(prompt)
+    #     selected_team = League::Team.all[prompt.to_i-1]
+    #     puts ""
+    #     puts "---------------------------"
+    #     puts "Team Name: " + selected_team.full_name
+    #     puts "City: " + selected_team.city
+    #     puts "Division: " + selected_team.division
+    #     puts "Conference: " + selected_team.conference
+    #     puts ""
+    #     puts "---------------------------"
+    # end
 
 
     def goodbye
